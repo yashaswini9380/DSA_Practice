@@ -1,0 +1,51 @@
+# ----- Prefix Sum Implementation ----------
+A prefix sum is an array where each element stores the running total of all elements from the start of the original array up to that index.
+The idea is to create an array prefixSum[] of size n, and for each index i in range 1 to n - 1, set prefixSum[i] = prefixSum[i - 1] + arr[i].
+
+*prefixSum[i] = prefixSum[i - 1] + arr[i].*
+*Current prefix sum = Previous prefix sum + Current array element*
+Because prefix sum means the total sum from the beginning up to the current index.
+
+To solve the problem follow the given steps:
+
+- Declare a new array prefixSum[] of the same size as the input array
+- Run a for loop to traverse the input array
+- For each index add the value of the current element and the previous value of the prefix sum array
+
+arr = [2, 4, 1, 5]
+i = 0
+prefixSum[0] = arr[0]
+             = 2
+
+i = 1
+prefixSum[1] = prefixSum[0] + arr[1]
+             = 2 + 4
+             = 6
+
+i = 2
+prefixSum[2] = prefixSum[1] + arr[2]
+             = 6 + 1
+             = 7
+
+i = 3
+prefixSum[3] = prefixSum[2] + arr[3]
+             = 7 + 5
+             = 12
+            
+*Because prefixSum[i - 1] already contains everything before the current element.*
+
+# --------- We use the Sliding Window technique.---------------
+A window is simply the group of k elements we're currently looking at.
+
+- First calculate the sum of the first k elements.
+- Then move the window one position at a time.
+- Add the new element entering the window.
+- Subtract the old element leaving the window.
+- Keep track of the maximum sum.
+
+# ------------- Kadane's algorithm --------
+The idea of Kadane's algorithm is to traverse over the array from left to right and for each element, find the maximum sum among all subarrays ending at that element. The result will be the maximum of all these values. 
+
+*Choice 1: Extend the maximum sum subarray ending at the previous element by adding the current element to it. If the maximum subarray sum ending at the previous index is positive, then it is always better to extend the subarray.*
+
+*Choice 2: Start a new subarray starting from the current element. If the maximum subarray sum ending at the previous index is negative, it is always better to start a new subarray from the current element.*
